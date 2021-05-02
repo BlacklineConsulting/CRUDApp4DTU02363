@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { IProduct } from '../models/product';
-import { ShopService } from './items.service';
-import { IBrand } from '../models/brand';
-import { IType } from '../models/productType';
+import { ItemsService } from './items.service';
 import { ItemsParams } from '../models/itemsParams';
 
 @Component({
@@ -13,8 +11,6 @@ import { ItemsParams } from '../models/itemsParams';
 export class ItemsComponent implements OnInit {
   @ViewChild('search') searchTerm: ElementRef;
   products: IProduct[];
-  brands: IBrand[];
-  types: IType[];
   itemsParams: ItemsParams;
   totalCount: number;
   sortOptions = [
@@ -23,14 +19,13 @@ export class ItemsComponent implements OnInit {
     { name: 'Price: High to Low', value: 'priceDesc' }
   ];
 
-  constructor(private itemsService: ShopService) {
-    this.itemsParams = this.itemsService.getShopParams();
+  constructor(private itemsService: ItemsService) {
+    this.itemsParams = this.itemsService.getItemsParams();
   }
 
   ngOnInit() {
     this.getProducts(true);
-    this.getBrands();
-    this.getTypes();
+
   }
 
   getProducts(useCache = false) {
@@ -40,38 +35,6 @@ export class ItemsComponent implements OnInit {
     }, error => {
       console.log(error);
     });
-  }
-
-  getBrands() {
-    this.itemsService.getBrands().subscribe(response => {
-      this.brands = [{ id: 0, name: 'All' }, ...response];
-    }, error => {
-      console.log(error);
-    });
-  }
-
-  getTypes() {
-    this.itemsService.getTypes().subscribe(response => {
-      this.types = [{ id: 0, name: 'All' }, ...response];
-    }, error => {
-      console.log(error);
-    });
-  }
-
-  onBrandSelected(brandId: number) {
-    const params = this.itemsService.getShopParams();
-    params.brandId = brandId;
-    params.pageNumber = 1;
-    this.itemsService.setShopParams(params);
-    this.getProducts();
-  }
-
-  onTypeSelected(typeId: number) {
-    const params = this.itemsService.getShopParams();
-    params.typeId = typeId;
-    params.pageNumber = 1;
-    this.itemsService.setShopParams(params);
-    this.getProducts();
   }
 
   onSortSelected(sort: string) {

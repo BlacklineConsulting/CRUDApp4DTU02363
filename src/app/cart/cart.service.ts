@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { ICart, ICartItem, Cart, ICartTotals } from '../shared/models/cart';
+import { ICart, ICartItem, Cart, ICartTotals } from '../models/cart';
 import { map } from 'rxjs/operators';
-import { IProduct } from '../shared/models/product';
-import { IDeliveryMethod } from '../shared/models/deliveryMethod';
+import { IProduct } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
