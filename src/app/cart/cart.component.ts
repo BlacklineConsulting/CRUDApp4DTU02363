@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ICart, ICartItem, ICartTotals } from '../shared/models/cart';
+import { ICart, ICartItem, ICartTotals } from '../models/cart';
 import { cartService } from './cart.service';
 
 @Component({

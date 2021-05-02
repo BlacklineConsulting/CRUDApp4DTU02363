@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IOrder } from 'src/app/shared/models/order';
+import { IOrder } from '../../models/order';
 
 @Component({
-  selector: 'app-checkout-success',
-  templateUrl: './checkout-success.component.html',
-  styleUrls: ['./checkout-success.component.scss']
+  selector: 'app-confirmation',
+  templateUrl: './confirmation.component.html',
+  styleUrls: ['./confirmation.component.css']
 })
 export class ConfirmationComponent implements OnInit {
   order: IOrder;
